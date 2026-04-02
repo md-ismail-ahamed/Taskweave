@@ -3,14 +3,16 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import "./App.css";
+import type { JSX } from "react";
+
+function ProtectedRoute({ children }: { children: JSX.Element }) {
+  const token = sessionStorage.getItem("token");
+  return token ? children : <Navigate to="/login" replace />;
+}
 
 function App() {
-
-  const token = sessionStorage.getItem("token");
-
   return (
-   
-<BrowserRouter>
+    <BrowserRouter>
       <Routes>
 
         <Route path="/login" element={<Login />} />
@@ -20,20 +22,23 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            token ? <Dashboard /> : <Navigate to="/login" replace />
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/"
           element={
-            token ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />
+            sessionStorage.getItem("token")
+              ? <Navigate to="/dashboard" replace />
+              : <Navigate to="/login" replace />
           }
         />
 
       </Routes>
-      </BrowserRouter>
-
+    </BrowserRouter>
   );
 }
 

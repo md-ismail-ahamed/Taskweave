@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
 export default function Login() {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,12 +40,11 @@ export default function Login() {
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("role", selectedRole);
       sessionStorage.setItem("userId", data.id);
-      //sessionStorage.setItem("name", data.name);
 
       console.log("TOKEN:", data.token);
       console.log("ROLE:", selectedRole);
 
-    navigate("/dashboard")
+      navigate("/dashboard");
     } catch (err) {
       setError("Server error. Please try again.");
     } finally {
@@ -78,7 +76,6 @@ export default function Login() {
           .auth-side { display: none; }
         }
 
-        /* Left decorative panel */
         .auth-side {
           background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
           display: flex;
@@ -157,7 +154,6 @@ export default function Login() {
         .side-stat-val { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; }
         .side-stat-label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
 
-        /* Right form panel */
         .auth-form-panel {
           display: flex;
           align-items: center;
