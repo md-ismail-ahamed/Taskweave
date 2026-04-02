@@ -36,7 +36,7 @@ type Tab = "overview" | "tasks" | "team";
 export default function ManagerDashboard() {
 
   const navigate = useNavigate();
-  const API_URL = "http://localhost:3000";
+  const API_URL = "https://taskweave-backend.onrender.com";
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [members, setMembers] = useState<Member[]>([]);

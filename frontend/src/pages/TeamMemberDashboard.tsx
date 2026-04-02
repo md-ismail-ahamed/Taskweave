@@ -21,7 +21,7 @@ interface Task {
 export default function TeamMemberDashboard() {
 
   const navigate = useNavigate();
-  const API_URL = "http://localhost:3000";
+  const API_URL = "https://taskweave-backend.onrender.com";
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);

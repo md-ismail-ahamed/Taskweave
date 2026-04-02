@@ -10,7 +10,7 @@ export default function Register() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:3000";
+  const API_URL = "https://taskweave-backend.onrender.com";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
