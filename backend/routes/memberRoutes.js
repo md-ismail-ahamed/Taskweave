@@ -2,10 +2,10 @@ const express = require('express');
 const TeamMember = require('../models/member');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { authMiddleware } = require('../middleware/authMiddleware'); // 🔥 IMPORT
+const { authMiddleware } = require('../middleware/authMiddleware'); 
 const router = express.Router();
 
-// ✅ REGISTER TEAM MEMBER (FIXED)
+
 router.post('/register', authMiddleware, async (req, res) => {
     try {
         const { name, email, password, skills, capacityHours } = req.body;
@@ -26,7 +26,7 @@ router.post('/register', authMiddleware, async (req, res) => {
             password: hashPassword,
             skills: formattedSkills,
             capacityHours: capacityHours || 0,
-            managerId   // ✅ always correct now
+            managerId  
         });
 
         res.json(member);
@@ -38,7 +38,6 @@ router.post('/register', authMiddleware, async (req, res) => {
 });
 
 
-// ✅ LOGIN
 router.post('/login', async(req,res) => {
     const {email, password} = req.body;
 
@@ -63,7 +62,7 @@ router.post('/login', async(req,res) => {
 });
 
 
-// ✅ GET MEMBERS (OPTIONAL FILTER)
+
 router.get('/', async(req,res) => {
    const members = await TeamMember.find();
    res.json(members);
