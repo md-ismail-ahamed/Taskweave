@@ -73,7 +73,6 @@ const initials = userName
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");
     if (!storedToken) {
-    alert("Please login as manager");
     navigate("/login");
     
   }

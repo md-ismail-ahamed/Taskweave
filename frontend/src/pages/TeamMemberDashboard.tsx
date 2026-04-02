@@ -30,7 +30,6 @@ export default function TeamMemberDashboard() {
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");
     if (!storedToken) { 
-      alert("Please login as team member");
       navigate("/login");
     }
     else {
@@ -38,7 +37,7 @@ export default function TeamMemberDashboard() {
     }
   }, []);
 
-  const token = sessionStorage.getItem("token");
+ 
   const memberName = sessionStorage.getItem("name") || "Team Member";
   const memberInitials = memberName
     .split(" ")
@@ -60,7 +59,7 @@ export default function TeamMemberDashboard() {
 
   const loadTasks = async () => {
     const response = await fetch(`${API_URL}/api/task`, {
-      headers: { Authorization: token || "" }
+      headers: { Authorization: sessionStorage.getItem("token") || "" }
     });
     const data = await response.json();
     setTasks(Array.isArray(data) ? data : []);
@@ -69,7 +68,7 @@ export default function TeamMemberDashboard() {
   const markComplete = async (taskId: string) => {
     await fetch(`${API_URL}/api/task/update-status/${taskId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", Authorization: token || "" },
+      headers: { "Content-Type": "application/json", Authorization: sessionStorage.getItem("token") || "" },
       body: JSON.stringify({ status: "completed" })
     });
     await loadTasks();
@@ -542,7 +541,7 @@ if(loading) return null;
                             onClick={async () => {
                               await fetch(`${API_URL}/api/task/update-status/${task._id}`, {
                                 method: "PUT",
-                                headers: { "Content-Type": "application/json", Authorization: token || "" },
+                                headers: { "Content-Type": "application/json", Authorization: sessionStorage.getItem("token") || "" },
                                 body: JSON.stringify({ status: "in-progress" })
                               });
                               if (task.projectLink) window.open(task.projectLink, "_blank");
